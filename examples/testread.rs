@@ -5,21 +5,21 @@ use std::str;
 use std::ffi::{CStr, CString};
 use libc::{c_char, c_int, strncpy, O_RDONLY};
 
-extern "C" fn auth_data(srv: *const c_char,
-            shr: *const c_char,
-            wg: *mut c_char,
-            wglen: c_int,
+extern "C" fn auth_data(_srv: *const c_char,
+            _shr: *const c_char,
+            _wg: *mut c_char,
+            _wglen: c_int,
             un: *mut c_char,
-            unlen: c_int,
+            _unlen: c_int,
             pw: *mut c_char,
-            pwlen: c_int) {
+            _pwlen: c_int) {
                 unsafe {
         strncpy(un, CString::new("vertexclique").unwrap().as_ptr(), 12);
         strncpy(pw, CString::new("1234").unwrap().as_ptr(), 4);
     }
 }
 
-pub static mut authCallback: smbc::smbc_get_auth_data_fn = Some(auth_data);
+pub static mut AUTH_CALLBACK: smbc::smbc_get_auth_data_fn = Some(auth_data);
 
 fn main() {
     println!("Launch...");
@@ -30,7 +30,7 @@ fn main() {
         let dstlen = 300;
         let mut file_contents = Vec::with_capacity(dstlen as usize);
 
-        smbc::smbc_init(authCallback, 0);
+        smbc::smbc_init(AUTH_CALLBACK, 0);
         let retval: i32 = smbc::smbc_open(fname.as_ptr(), O_RDONLY, 0);
         if retval < 0 {
             println!("Couldn't accessed to a SMB file");

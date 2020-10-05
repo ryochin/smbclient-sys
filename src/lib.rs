@@ -114,10 +114,10 @@ pub const SMBC_ENCRYPTLEVEL_REQUIRE: c_uint = 2;
  * available capabilities.
  */
 pub type smbc_vfs_feature = c_uint;
-pub const SMBC_VFS_FEATURE_RDONLY: c_uint = (1 << 0);
-pub const SMBC_VFS_FEATURE_DFS: c_uint = (1 << 28);
-pub const SMBC_VFS_FEATURE_CASE_INSENSITIVE: c_uint = (1 << 29);
-pub const SMBC_VFS_FEATURE_NO_UNIXCIFS: c_uint = (1 << 30);
+pub const SMBC_VFS_FEATURE_RDONLY: c_uint = 1 << 0;
+pub const SMBC_VFS_FEATURE_DFS: c_uint = 1 << 28;
+pub const SMBC_VFS_FEATURE_CASE_INSENSITIVE: c_uint = 1 << 29;
+pub const SMBC_VFS_FEATURE_NO_UNIXCIFS: c_uint = 1 << 30;
 
 pub type smbc_bool = c_int;
 
@@ -178,10 +178,10 @@ pub type SMBCCTX = _SMBCCTX;
  *   smbc_setOptionUseCCache()
  *   smbc_getOptionUseCCache()
  */
-static SMB_CTX_FLAG_USE_KERBEROS 			: i32 = (1 << 0);
-static SMB_CTX_FLAG_FALLBACK_AFTER_KERBEROS : i32 = (1 << 1);
-static SMBCCTX_FLAG_NO_AUTO_ANONYMOUS_LOGON : i32 = (1 << 2);
-static SMB_CTX_FLAG_USE_CCACHE 				: i32 = (1 << 3);
+static SMB_CTX_FLAG_USE_KERBEROS 			: i32 = 1 << 0;
+static SMB_CTX_FLAG_FALLBACK_AFTER_KERBEROS : i32 = 1 << 1;
+static SMBCCTX_FLAG_NO_AUTO_ANONYMOUS_LOGON : i32 = 1 << 2;
+static SMB_CTX_FLAG_USE_CCACHE 				: i32 = 1 << 3;
 
 
 pub type smbc_get_auth_data_fn = option::Option<extern "C" fn(srv: *const c_char,

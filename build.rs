@@ -2,7 +2,7 @@ extern crate pkg_config;
 
 fn main ()
 {
-    match pkg_config::find_library("smbclient") {
+    match pkg_config::probe_library("smbclient") {
         Ok(_) => {
             if cfg!(target_os = "macos") {
                 println!("cargo:rustc-flags=-L /usr/local/lib -l smbclient");
@@ -12,7 +12,7 @@ fn main ()
         },
         Err(e) => {
             println!("error: SMB Client library not found! Probably libsmbclient is not installed.");
-            panic!("{}", e);
+            panic!("pkg_config probe failed: {}", e);
         }
     };
 }

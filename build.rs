@@ -5,7 +5,7 @@ fn main ()
     match pkg_config::probe_library("smbclient") {
         Ok(_) => {
             if cfg!(target_os = "macos") {
-                println!("cargo:rustc-flags=-L /usr/local/lib -l smbclient");
+                println!("cargo:rustc-flags=-L /opt/samba/lib -l smbclient");
             } else {
                 println!("cargo:rustc-flags=-l smbclient");
             }
